@@ -2,64 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Peran;
 use Illuminate\Http\Request;
+
+use App\Models\Film;
+use App\Models\Cast;
+use App\Models\Peran;
 
 class PeranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    //
+    public function create(Film $film)
     {
-        //
+        $casts = Cast::select('id', 'nama')->get();
+        return view('peran.create', compact('film', 'casts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request, Film $film)
     {
-        //
-    }
+        $request->validate([
+            'cast' => 'required',
+            'nama' => 'required',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $peran = new Peran;
+        $peran->film_id = $film->id;
+        $peran->cast_id = $request->cast;
+        $peran->nama = $request->nama;
+        $peran->save();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Peran $peran)
-    {
-        //
-    }
+        return redirect()->route('film.show', $film->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Peran $peran)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Peran $peran)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Peran $peran)
-    {
-        //
     }
 }

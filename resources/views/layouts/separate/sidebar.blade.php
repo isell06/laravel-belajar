@@ -66,6 +66,12 @@
                   <p>Cast</p> 
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/film" class="nav-link @if (Request::segment(1) == 'film') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Film</p>
+                </a>
+              </li>
           <li class="nav-item">
             <form action="{{ route('auth.logout') }}" method="POST">
               @csrf

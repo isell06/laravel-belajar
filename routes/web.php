@@ -5,6 +5,8 @@ use App\Http\Controllers\CastController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\PeranController;
+use App\Http\Controllers\KritikController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +41,8 @@ Route::controller(AuthController::class)->group(function() {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
 });
 
+Route::get('/film/{film}/peran/create', [PeranController::class, 'create'])->name('peran.create')->middleware('auth');
 
+Route::post('/film/{film}/peran', [PeranController::class, 'store'])->name('peran.store')->middleware('auth');
+
+Route::resource('/kritik', KritikController::class)->middleware('auth');

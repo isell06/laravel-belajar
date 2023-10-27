@@ -64,7 +64,9 @@ class FilmController extends Controller
     public function show(Film $film)
     {
         //
-    }
+        $kritiks = Kritik::where('film_id', $film->id)->get();
+
+        return view('film.show', compact('film', 'kritiks'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +74,7 @@ class FilmController extends Controller
     public function edit(Film $film)
     {
         //
+        
     }
 
     /**
@@ -88,5 +91,7 @@ class FilmController extends Controller
     public function destroy(Film $film)
     {
         //
+        $films = Film::where('id', $film->id)->delete();
+        return redirect()->route('film.index');
     }
 }

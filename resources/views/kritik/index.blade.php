@@ -34,9 +34,9 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with minimal features & hover style</h3>
-              <a href="{{ route('film.create') }}" class="btn btn-sm btn-primary float-right">
+              <a href="{{ route('kritik.create') }}" class="btn btn-sm btn-primary float-right">
               <i class="fas fa-plus"></i>
-              Add Film
+              Add Kritik
               </a>
             </div>
             <!-- /.card-header -->
@@ -45,24 +45,24 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Judul</th>
-                  <th>Tahun</th>
-                  <th>Genre</th>
+                  <th>User</th>
+                  <th>Film</th>
+                  <th>Content</th>
+                  <th>Point</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach ($films as $key => $value)
+                  @foreach ($kritiks as $key => $value)
                   <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td>{{ $value->judul }}</td>
-                    <td>{{ $value->tahun }}</td>
-                    <td>{{ $value->genre[0]->nama }}</td>
+                    <td>{{ $value->user[0]->nama }}</td>
+                    <td>{{ $value->film[0]->judul }}</td>
+                    <td>{{ $value->content }}</td>
+                    <td>{{ $value->point }}</td>
                     <td>                        
-                        <form action="{{ route('film.destroy', $value->id) }}" method="post">
+                        <form action="{{ route('kritik.destroy', $value->id) }}" method="post">
                         @csrf 
                         @method('DELETE')
-                            <a href="{{ route('film.show', $value->id) }}" class="btn-sm btn-info">Show</a>
-                            <a href="{{ route('film.edit', $value->id) }}" class="btn-sm btn-warning">Edit</a>
                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>                            
                     </td>

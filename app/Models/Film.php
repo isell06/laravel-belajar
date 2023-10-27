@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Genre;
+use App\Models\Peran;
 
 class Film extends Model
 {
@@ -19,7 +21,16 @@ class Film extends Model
         
     public function genre()
         {
-            return $this->hasMany('App\Models\Genre','id', 'genre_id');
+            // return $this->hasMany('App\Models\Genre','id', 'genre_id');
+            return $this->hasMany(Genre::class, 'id', 'genre_id');
         }
 
-}
+    public function peran()
+        {
+            return $this->hasMany(Peran::class);
+        }
+    public function kritik()
+        {
+            return $this->belongsTo('App\Models\Kritik');
+        }
+    }
